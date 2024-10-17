@@ -11,10 +11,17 @@ import {
   createProductSchema,
   updateProductSchema,
 } from '../../db/productsSchema';
+import { verifySeller, verifyToken } from '../../middlewares/authMiddleware';
 
 const router = Router();
 
-router.post('/', validateData(createProductSchema), createProduct);
+router.post(
+  '/',
+  verifyToken,
+  verifySeller,
+  validateData(createProductSchema),
+  createProduct
+);
 router.get('/', listProducts);
 router.get('/:id', getProductById);
 router.delete('/:id', deleteProduct);

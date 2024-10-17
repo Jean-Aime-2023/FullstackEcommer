@@ -30,7 +30,7 @@ export async function getProductById(req: Request, res: Response) {
 }
 export async function createProduct(req: Request, res: Response) {
   try {
-    const data = _.pick(req.body, Object.keys(createProductSchema.shape));
+    console.log(req.userId)
     const [product] = await db
       .insert(productsTable)
       .values(req.cleanBody)
